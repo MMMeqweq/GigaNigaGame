@@ -40,7 +40,8 @@ namespace GigaNigaGame
                 CardInfo card = new CardInfo()
                 {
                     Num = number,
-                    suit = CardInfo.SuitChoose(i % 4)
+                    suit = CardInfo.SuitChoose(i % 4),
+                    CardColor = CardInfo.ColorChoose(i % 4)
                 };
                 card.SuitSource = CardInfo.Suits(card).ToString();
                 Lists.CardSet.Add(card);

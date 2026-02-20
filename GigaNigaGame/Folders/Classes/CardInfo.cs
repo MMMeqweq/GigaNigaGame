@@ -13,7 +13,7 @@ namespace GigaNigaGame
     public class CardInfo
     {
         public int Num;
-        public Brush CardColor;
+        public string CardColor;
         public Suit suit;
         public bool FaceUp = false;
         public string SuitSource;
@@ -67,6 +67,26 @@ namespace GigaNigaGame
 
                 default:
                     return GigaNigaGame.Suit.Hearts;
+            }
+        }
+        internal static string ColorChoose(int num)
+        {
+            switch (num)
+            {
+                case 0:
+                    return "Red";
+
+                case 1:
+                    return "Black";
+
+                case 2:
+                    return "Black";
+
+                case 3:
+                    return "Red";
+
+                default:
+                    return "Error";
             }
         }
 

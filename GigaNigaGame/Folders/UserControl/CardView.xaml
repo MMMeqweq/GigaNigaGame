@@ -6,10 +6,16 @@
              xmlns:local="clr-namespace:GigaNigaGame"
              mc:Ignorable="d" 
              d:DesignHeight="25" d:DesignWidth="10">
+    <!--<Border
+    Background="White"
+    CornerRadius="15"
+    Padding="10" 
+    BorderBrush="#DDD"
+    BorderThickness="1">-->
     <Grid Background="White" x:Name="BColor">
         <Image x:Name="CardImage" Stretch="Fill" Opacity="1"/>
-        <Button x:Name="Button" Content="5" Click="Cover_Click" FontSize="27.5" Margin="7.5" Background="Transparent" Foreground="Gold"/>
+        <Button x:Name="Button" Content="5" Click="Cover_Click" FontSize="27.5" Margin="7.5" Background="Transparent" Foreground="DarkKhaki"/>
         <Button x:Name ="Cover" Background="Green" Opacity="1"/>
-        
     </Grid>
+    <!--</Border>-->
 </UserControl>

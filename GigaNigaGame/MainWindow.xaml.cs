@@ -97,8 +97,8 @@ namespace GigaNigaGame
             for (int i = CardsLeft - 1; i >= 0; i--)
             {
                 var card = Lists.CardUC[i];
-                int Yoffset = Yoff.Next(-15, 15);
-                int Xoffset = Xoff.Next(-15, 15);
+                int Yoffset = Yoff.Next(-7, 7);
+                int Xoffset = Xoff.Next(-7, 7);
                 Canvas.SetLeft(card, Yoffset);
                 Canvas.SetTop(card, Xoffset);
                 FaceOffCards.Children.Add(card);

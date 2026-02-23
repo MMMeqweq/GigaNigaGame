@@ -21,7 +21,6 @@ namespace GigaNigaGame.Folders.Classes
                 bool Run = (Lists.StackPiles[i] != owner && ChosenCard.Num + 1 == TargetCard.Num && ChosenCard.CardColor != TargetCard.CardColor);
                 if (Run)
                 {
-
                     ChosenCard.Num = 99;
                     cardView.Button.Content = ChosenCard.Num;
                     return;

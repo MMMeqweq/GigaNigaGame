@@ -9,7 +9,7 @@
     <Border
     Background="White"
     CornerRadius="15"
-    Padding="3" 
+    Padding="5" 
     BorderBrush="#DDD"
     BorderThickness="0.1">
     <Grid Background="White" x:Name="BColor">

@@ -28,6 +28,7 @@ namespace GigaNigaGame
             Model = card;
             Button.Content = card.Num;
             CardImage.Source = new BitmapImage(new Uri(card.SuitSource));
+            Button.Foreground = (Brush)new BrushConverter().ConvertFromString(card.CardColor);
             Cover.Visibility = card.FaceUp ? Visibility.Collapsed : Visibility.Visible;
         }
 

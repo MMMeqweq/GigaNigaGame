@@ -15,7 +15,7 @@
     <Grid Background="White" x:Name="BColor">
         <Image x:Name="CardImage" Stretch="Fill" Opacity="1"/>
             <Button x:Name="Button" Content="5" Click="Cover_Click" FontSize="25" Margin="7.5" Background="Transparent" VerticalContentAlignment="Top" Foreground="DarkKhaki"/>
-            <Button x:Name ="Cover" Style="{StaticResource RoundedButton}" Background="Green" Opacity="1"/>
+            <Button x:Name ="Cover" Style="{StaticResource RoundedButton}" Background="Green" Opacity="0.3"/>
     </Grid>
     </Border>
 </UserControl>

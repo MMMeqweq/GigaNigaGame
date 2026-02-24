@@ -9,18 +9,25 @@
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.4*"/>
+            <RowDefinition Height="0.01*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
-            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="TempTest" Grid.Column="3" Grid.ColumnSpan="4" FontSize="35"/>
+        <Grid Grid.Row="2" x:Name="PilesGrid" Grid.ColumnSpan="10" >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+        </Grid>
+        <TextBox x:Name="TempTest" Grid.Column="1" FontSize="35"/>
         <Canvas x:Name="FaceOffCards"/>
     </Grid>
 </Window>

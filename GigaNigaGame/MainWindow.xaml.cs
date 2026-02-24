@@ -26,7 +26,7 @@ namespace GigaNigaGame
     public partial class MainWindow : Window
     {
         internal const int CardWidth = 75;
-        internal const int CardHeight = 125;
+        internal const int CardHeight = 115;
         static Random Yoff = new Random();
         static Random Xoff = new Random();
 
@@ -56,6 +56,30 @@ namespace GigaNigaGame
             CardInfo.ShuffleModel(Lists.CardSet);
             //int counter = 0;
             //int cardamount = 1;   
+            
+            PileDeal();
+
+            Deal();
+            RenderAll();
+            int CardsLeft = 24;
+            for (int i = CardsLeft - 1; i >= 0; i--)
+            {
+                var card = Lists.CardUC[i];
+                int Yoffset = Yoff.Next(-7, 7);
+                int Xoffset = Xoff.Next(-7, 7);
+                Canvas.SetLeft(card, Yoffset);
+                Canvas.SetTop(card, Xoffset);
+                FaceOffCards.Children.Add(card);
+                Lists.CardSet.RemoveAt(i);
+                if (i == CardsLeft)
+                    card.Cover.Visibility = Visibility.Collapsed;
+            }
+
+            TempTest.Text = Lists.CardSet.Count.ToString() + " and" + Lists.CardUC.Count.ToString();
+        }
+
+        private void PileDeal()
+        {
             for (int i = 1; i < 8; i++)
             {
 
@@ -84,31 +108,11 @@ namespace GigaNigaGame
                 var pile = new StackPile();
                 pile.MoveRequested += OnMoveRequested; ;
 
-                Grid.SetRow(pile, 1);
                 Grid.SetColumn(pile, i - 1);
-                MainGrid.Children.Add(pile);
+                PilesGrid.Children.Add(pile);
 
                 Lists.StackPiles.Add(pile);
             }
-
-            Deal();
-            RenderAll();
-            int CardsLeft = Lists.CardUC.Count;
-            for (int i = CardsLeft - 1; i >= 0; i--)
-            {
-                var card = Lists.CardUC[i];
-                int Yoffset = Yoff.Next(-7, 7);
-                int Xoffset = Xoff.Next(-7, 7);
-                Canvas.SetLeft(card, Yoffset);
-                Canvas.SetTop(card, Xoffset);
-                FaceOffCards.Children.Add(card);
-                Lists.CardUC.RemoveAt(i);
-                Lists.CardSet.RemoveAt(i);
-                if (i == CardsLeft)
-                    card.Cover.Visibility = Visibility.Collapsed;
-            }
-
-            TempTest.Text = Lists.CardSet.Count.ToString() + " and" + Lists.CardUC.Count.ToString();
         }
 
         private void OnMoveRequested(StackPile arg1, List<CardInfo> arg2, Point arg3)
@@ -128,12 +132,16 @@ namespace GigaNigaGame
                     if (Lists.CardSet.Count == 0)
                         return; 
                     var card = Lists.CardSet[0];
+                    var CardUC = Lists.CardUC[0];
                     card.FaceUp = (j == cardsToDeal - 1);
                     Lists.StackPiles[pileIndex].Cards.Add(card);
+                    Lists.StackPiles[pileIndex].CardViews.Add(CardUC);
                     Lists.CardSet.RemoveAt(0);
+                    Lists.CardUC.RemoveAt(0);
 
-                    if (Lists.CardUC.Count > 0)
-                        Lists.CardUC.RemoveAt(0);
+                   // if (Lists.CardUC.Count > 0)
+                        //Lists.CardUC.RemoveAt(0);
+                    
                 }
             }
         }
@@ -145,7 +153,11 @@ namespace GigaNigaGame
             var to = Lists.StackPiles[ToIndex];
 
             From.RemoveFrom(Moving[0]);
-
+            foreach (var card in Moving)
+            {
+                Cards Card = new Cards(card);
+                to.CardViews.Add(Card);
+            }
             to.AddCards(Moving);
 
             if (From.Cards.Count > 0)
@@ -154,10 +166,11 @@ namespace GigaNigaGame
             RenderAll();
         }
 
-        internal void RenderAll()
+        public void RenderAll()
         {
             foreach (var pile in Lists.StackPiles)
                 pile.Render();
+            
         }
 
         private void BuildDeck()

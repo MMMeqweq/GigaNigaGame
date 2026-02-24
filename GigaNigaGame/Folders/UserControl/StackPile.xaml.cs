@@ -15,7 +15,7 @@ namespace GigaNigaGame
     {
         public List<CardInfo> Cards = new List<CardInfo>();
         public List<Cards> CardViews = new List<Cards>();
-        public double YOffset = 30;
+        public double YOffset = 40;
 
         public event Action<StackPile, List<CardInfo>, Point> MoveRequested;
 

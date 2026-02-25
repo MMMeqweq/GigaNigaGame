@@ -17,12 +17,22 @@ namespace GigaNigaGame
         public Suit suit;
         public bool FaceUp = false;
         public string SuitSource;
+        public Set set;
         public Point point;
         static readonly Random random = new Random();
         
             
         
 
+        
+        public void SetShop()
+        {
+            set = Set.shop;
+        }
+        public void SetPiles()
+        {
+            set = Set.pile;
+        }
 
         internal static ImageSource Suits(CardInfo card)
         {

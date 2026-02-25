@@ -26,6 +26,7 @@ namespace GigaNigaGame
         {
             InitializeComponent();
             Model = card;
+            TAG.Text = card.set.ToString();
             Button.Content = card.Num;
             CardImage.Source = new BitmapImage(new Uri(card.SuitSource));
             Button.Foreground = (Brush)new BrushConverter().ConvertFromString(card.CardColor);

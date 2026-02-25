@@ -14,8 +14,9 @@
     BorderThickness="0.1">
     <Grid Background="White" x:Name="BColor">
         <Image x:Name="CardImage" Stretch="Fill" Opacity="1"/>
-            <Button x:Name="Button" Content="5" Click="Cover_Click" FontSize="25" Margin="7.5" Background="Transparent" VerticalContentAlignment="Top" Foreground="DarkKhaki"/>
-            <Button x:Name ="Cover" Style="{StaticResource RoundedButton}" Background="Green"/>
+            <Button x:Name="Button" Tag="0"  Content="5" Click="Cover_Click" FontSize="25" Margin="7.5" Background="Transparent" VerticalContentAlignment="Top" Foreground="DarkKhaki"/>
+            <TextBlock x:Name="TAG" Text="IDK" Visibility="Collapsed"/>
+            <Button x:Name ="Cover" Style="{StaticResource RoundedButton}" Background="Green" Visibility="Collapsed"/>
     </Grid>
     </Border>
 </UserControl>

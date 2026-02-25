@@ -23,6 +23,7 @@ namespace GigaNigaGame
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public enum Suit { Hearts, Spades, Clubs, Diamonds }
+    public enum Set { shop, pile }
     public partial class MainWindow : Window
     {
         internal const int CardWidth = 75;
@@ -41,14 +42,15 @@ namespace GigaNigaGame
                 {
                     Num = number,
                     suit = CardInfo.SuitChoose(i % 4),
-                    CardColor = CardInfo.ColorChoose(i % 4)
+                    CardColor = CardInfo.ColorChoose(i % 4),
                 };
+                card.SetPiles();
                 card.SuitSource = CardInfo.Suits(card).ToString();
                 Lists.CardSet.Add(card);
                 Cards cards = new Cards(card)
                 {
                     Width = CardWidth,
-                    Height = CardHeight
+                    Height = CardHeight,
                 };
                 Lists.CardUC.Add(cards);
             }
@@ -65,17 +67,20 @@ namespace GigaNigaGame
             for (int i = CardsLeft - 1; i >= 0; i--)
             {
                 var card = Lists.CardUC[i];
+                var CardSetI = Lists.CardSet[i];
+                CardSetI.SetShop();
+                card.TAG.Text = Set.shop.ToString();
                 int Yoffset = Yoff.Next(-7, 7);
                 int Xoffset = Xoff.Next(-7, 7);
                 Canvas.SetLeft(card, Yoffset);
                 Canvas.SetTop(card, Xoffset);
                 FaceOffCards.Children.Add(card);
-                Lists.CardSet.RemoveAt(i);
+                Lists.CardSet.Remove(CardSetI);
                 if (i == CardsLeft)
                     card.Cover.Visibility = Visibility.Collapsed;
             }
 
-            TempTest.Text = Lists.CardSet.Count.ToString() + " and" + Lists.CardUC.Count.ToString();
+            TempTest.Text = Set.pile.ToString();
         }
 
         private void PileDeal()
@@ -134,6 +139,7 @@ namespace GigaNigaGame
                     var card = Lists.CardSet[0];
                     var CardUC = Lists.CardUC[0];
                     card.FaceUp = (j == cardsToDeal - 1);
+                    
                     Lists.StackPiles[pileIndex].Cards.Add(card);
                     Lists.StackPiles[pileIndex].CardViews.Add(CardUC);
                     Lists.CardSet.RemoveAt(0);

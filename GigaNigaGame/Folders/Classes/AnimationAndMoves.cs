@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using System.Windows.Media.Media3D;
 
 namespace GigaNigaGame.Folders.Classes
@@ -18,13 +19,33 @@ namespace GigaNigaGame.Folders.Classes
             }
             else if (cardView.TAG.Text == "shop")
             {
-
+                ShopPress(cardView);
             }
         }
 
 
         private static void ShopPress(Cards cardview)
         {
+            var mainWindow = System.Windows.Application.Current.MainWindow as MainWindow;
+            mainWindow.FaceOffCards.Children.Remove(cardview);
+            Lists.FaceOffCards.Remove(cardview);
+            Lists.FaceUpCards.Add(cardview);
+            if (Lists.FaceOffCards.Count > 0)
+                Lists.FaceOffCards[Lists.FaceOffCards.Count - 1].Cover.Visibility = Visibility.Collapsed;
+            mainWindow.TempTest.Text = Lists.FaceOffCards.Count.ToString();
+            if (Lists.FaceOffCards.Count == 0)
+            {
+                for (int i = Lists.FaceUpCards.Count; i > 0; i--)
+                {
+                    CardInfo.Shuffle(Lists.FaceUpCards);
+                    var card = Lists.FaceUpCards[0];
+                    Lists.FaceUpCards.Remove(card);
+                    card.Cover.Visibility = Visibility.Visible;
+                    Lists.FaceOffCards.Add(card);
+                    mainWindow.FaceOffCards.Children.Add(card);
+                }
+                Lists.FaceOffCards[Lists.FaceOffCards.Count - 1].Cover.Visibility = Visibility.Collapsed;
+            }
 
         }
 
@@ -44,8 +65,8 @@ namespace GigaNigaGame.Folders.Classes
                 bool DifColor = (ChosenCard.CardColor != TargetCard.CardColor);
                 bool NotEmpty = (TargetPile.Cards.Count > 0);
                 bool Run = (DifPile && NumPlusOne && DifColor && NotEmpty);
-                if (!NotEmpty && DifColor && NotEmpty && NumPlusOne)
-                    if (TargetCard.Num == 13)
+                if (!NotEmpty)
+                    if (ChosenCard.Num == 13)
                         Run = true;
                 if (Run)
                 {
@@ -67,6 +88,7 @@ namespace GigaNigaGame.Folders.Classes
                         owner.CardViews[owner.Cards.Count - 1].Cover.Visibility = Visibility.Collapsed;
                         mainWindow.RenderAll();
                     }
+                    mainWindow.TempTest.Text = Lists.FaceOffCards.Count.ToString();
                     return;
                 }
             }

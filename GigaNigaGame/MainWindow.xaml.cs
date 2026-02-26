@@ -23,7 +23,7 @@ namespace GigaNigaGame
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public enum Suit { Hearts, Spades, Clubs, Diamonds }
-    public enum Set { shop, pile }
+    public enum Set { shop, pile, faceupshop }
     public partial class MainWindow : Window
     {
         internal const int CardWidth = 75;
@@ -76,7 +76,8 @@ namespace GigaNigaGame
                 Canvas.SetTop(card, Xoffset);
                 FaceOffCards.Children.Add(card);
                 Lists.CardSet.Remove(CardSetI);
-                if (i == CardsLeft)
+                Lists.FaceOffCards.Add(card);
+                if (i == 0)
                     card.Cover.Visibility = Visibility.Collapsed;
             }
 

@@ -20,11 +20,14 @@ namespace GigaNigaGame
         public Set set;
         public Point point;
         static readonly Random random = new Random();
-        
-            
-        
 
         
+
+
+
+
+
+
         public void SetShop()
         {
             set = Set.shop;
@@ -100,7 +103,7 @@ namespace GigaNigaGame
             }
         }
 
-        internal static List<Cards> Shuffle(List<Cards> list)
+        internal static List<CardView> Shuffle(List<CardView> list)
         { 
             for (int i = 0; i < 100; i++)
             {

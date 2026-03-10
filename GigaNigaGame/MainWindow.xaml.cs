@@ -47,7 +47,7 @@ namespace GigaNigaGame
                 card.SetPiles();
                 card.SuitSource = CardInfo.Suits(card).ToString();
                 Lists.CardSet.Add(card);
-                Cards cards = new Cards(card)
+                CardView cards = new CardView(card)
                 {
                     Width = CardWidth,
                     Height = CardHeight,
@@ -162,7 +162,7 @@ namespace GigaNigaGame
             From.RemoveFrom(Moving[0]);
             foreach (var card in Moving)
             {
-                Cards Card = new Cards(card);
+                CardView Card = new CardView(card);
                 to.CardViews.Add(Card);
             }
             to.AddCards(Moving);

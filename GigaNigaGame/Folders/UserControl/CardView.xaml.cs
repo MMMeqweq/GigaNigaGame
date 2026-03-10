@@ -17,12 +17,12 @@ using System.Windows.Shapes;
 
 namespace GigaNigaGame
 {
-    public partial class Cards : UserControl
+    public partial class CardView : UserControl
     {
         public CardInfo Model { get; private set; }
         public StackPile Owner { get; set; }
 
-        public Cards(CardInfo card)
+        public CardView(CardInfo card)
         {
             InitializeComponent();
             Model = card;

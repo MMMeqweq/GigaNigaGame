@@ -14,7 +14,7 @@ namespace GigaNigaGame
     public partial class StackPile : UserControl
     {
         public List<CardInfo> Cards = new List<CardInfo>();
-        public List<Cards> CardViews = new List<Cards>();
+        public List<CardView> CardViews = new List<CardView>();
         public double YOffset = 40;
 
         public event Action<StackPile, List<CardInfo>, Point> MoveRequested;
@@ -32,7 +32,7 @@ namespace GigaNigaGame
             for (int i = 0; i < Cards.Count; i++)
             {
                 var card = Cards[i];
-                var view = new Cards(card)
+                var view = new CardView(card)
                 {
                     Width = MainWindow.CardWidth,
                     Height = MainWindow.CardHeight,
@@ -56,7 +56,7 @@ namespace GigaNigaGame
 
         private void Card_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            if (!(sender is Cards View)) return;
+            if (!(sender is CardView View)) return;
             int index = (int)View.Tag;
 
             var moving = Cards.Skip(index).ToList();
@@ -86,8 +86,8 @@ namespace GigaNigaGame
         public void AddCard(CardInfo card)
         {
             Cards.Add(card);
-            Cards Card = new Cards(card);
-            CardViews.Add(new Cards(card));
+            CardView Card = new CardView(card);
+            CardViews.Add(new CardView(card));
         }
 
         public void RemoveCard(CardInfo card)

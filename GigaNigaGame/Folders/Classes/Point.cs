@@ -39,7 +39,9 @@ namespace GigaNigaGame.Folders.Classes
 
         public double Distance(Point other)
         {
-            return Math.Sqrt(x * x + y * y);
+            double XD = other.GetX() - x;
+            double YD = other.GetY() - y;
+            return Math.Sqrt(XD * XD + YD * YD);
         }
 
         public override string ToString()

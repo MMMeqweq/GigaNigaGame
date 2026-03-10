@@ -15,8 +15,9 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
+            <ColumnDefinition Width="7.5*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="2" x:Name="PilesGrid" Grid.ColumnSpan="10" >
+        <Grid Grid.Row="2" x:Name="PilesGrid" Grid.ColumnSpan="3" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -27,7 +28,8 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
         </Grid>
-        <TextBox x:Name="TempTest" Grid.Column="1" FontSize="35"/>
-        <Canvas x:Name="FaceOffCards"/>
+        <TextBox x:Name="TempTest" Grid.Column="2" FontSize="35"/>
+        <Canvas x:Name="FaceOffCards" HorizontalAlignment="Center"/>
+        <Canvas x:Name="FaceUpCards" Grid.Column="1" HorizontalAlignment="Center"/>
     </Grid>
 </Window>

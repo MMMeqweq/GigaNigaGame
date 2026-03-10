@@ -11,8 +11,9 @@ namespace GigaNigaGame.Folders.Classes
 {
     internal static class AnimationAndMoves
     {
-        public static void BPress(StackPile owner, Cards cardView)
+        public static void BPress(StackPile owner, CardView cardView)
         {
+             string str = $"Card {cardView.Model.Num} with the color {cardView.Model.CardColor} was pressed part of the set {cardView.TAG.Text}.";
             if (cardView.TAG.Text == "pile")
             {
                 MoveCards(owner, cardView);
@@ -21,13 +22,50 @@ namespace GigaNigaGame.Folders.Classes
             {
                 ShopPress(cardView);
             }
+            else if (cardView.TAG.Text == "faceupshop")
+            {
+               FaceUpShopPress(cardView, owner); 
+            }
         }
 
 
-        private static void ShopPress(Cards cardview)
+        private static void FaceUpShopPress(CardView cardView, StackPile owner)
+        {
+            var mainWindow = System.Windows.Application.Current.MainWindow as MainWindow;
+            var ChosenCard = cardView.Model;
+            for (int i = 0; i < Lists.StackPiles.Count; i++)
+            {
+                StackPile TargetPile = Lists.StackPiles[i];
+                var TargetCard = Lists.StackPiles[i].Cards[Lists.StackPiles[i].Cards.Count - 1];
+                string str = $"StackPile {i} has {Lists.StackPiles[i].Cards.Count} cards. Top card is {TargetCard.Num} with the color {TargetCard.CardColor}.";
+                bool NumPlusOne = (ChosenCard.Num + 1 == TargetCard.Num);
+                bool DifColor = (ChosenCard.CardColor != TargetCard.CardColor);
+                bool NotEmpty = (TargetPile.Cards.Count > 0);
+                bool Run = (NumPlusOne && DifColor && NotEmpty);
+                if (!NotEmpty)
+                    if (ChosenCard.Num == 13)
+                        Run = true;
+                if (Run)
+                {
+                    cardView.TAG.Text = Set.pile.ToString();
+                    Lists.FaceUpCards.Remove(cardView);
+                    mainWindow.FaceUpCards.Children.Remove(cardView);
+                    ChosenCard.FaceUp = true;
+                    TargetPile.AddCard(ChosenCard);
+                    mainWindow.RenderAll();
+                    mainWindow.TempTest.Text = Lists.FaceOffCards.Count.ToString();
+                    return;
+                }
+            }
+        }
+
+
+        private static void ShopPress(CardView cardview)
         {
             var mainWindow = System.Windows.Application.Current.MainWindow as MainWindow;
             mainWindow.FaceOffCards.Children.Remove(cardview);
+            mainWindow.FaceUpCards.Children.Add(cardview);
+            cardview.TAG.Text = Set.faceupshop.ToString();
             Lists.FaceOffCards.Remove(cardview);
             Lists.FaceUpCards.Add(cardview);
             if (Lists.FaceOffCards.Count > 0)
@@ -42,6 +80,8 @@ namespace GigaNigaGame.Folders.Classes
                     Lists.FaceUpCards.Remove(card);
                     card.Cover.Visibility = Visibility.Visible;
                     Lists.FaceOffCards.Add(card);
+                    card.TAG.Text = Set.shop.ToString();
+                    mainWindow.FaceUpCards.Children.Remove(card);
                     mainWindow.FaceOffCards.Children.Add(card);
                 }
                 Lists.FaceOffCards[Lists.FaceOffCards.Count - 1].Cover.Visibility = Visibility.Collapsed;
@@ -49,7 +89,7 @@ namespace GigaNigaGame.Folders.Classes
 
         }
 
-        private static void MoveCards(StackPile owner, Cards cardView)
+        private static void MoveCards(StackPile owner, CardView cardView)
         {
             int pileIndex = Lists.StackPiles.IndexOf(owner);
             int cardIndex = owner.Cards.IndexOf(cardView.Model);
@@ -70,6 +110,7 @@ namespace GigaNigaGame.Folders.Classes
                         Run = true;
                 if (Run)
                 {
+                    cardView.TAG.Text = Set.pile.ToString();
                     if (owner.Cards.Count - 1 == cardIndex)
                     {
                         owner.RemoveCard(ChosenCard);

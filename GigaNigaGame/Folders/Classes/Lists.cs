@@ -9,9 +9,9 @@ namespace GigaNigaGame
     public static class Lists
     {
         internal static List<CardInfo> CardSet = new List<CardInfo>();
-        internal static List<Cards> CardUC = new List<Cards>();
-        internal static List<Cards> FaceOffCards = new List<Cards>();
-        internal static List<Cards> FaceUpCards = new List<Cards>();
+        internal static List<CardView> CardUC = new List<CardView>();
+        internal static List<CardView> FaceOffCards = new List<CardView>();
+        internal static List<CardView> FaceUpCards = new List<CardView>();
         internal readonly static List<StackPile> StackPiles = new List<StackPile>();
         internal static List<CardInfo> MovingCards = new List<CardInfo>();
     }

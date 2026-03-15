@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -54,8 +54,10 @@ namespace GigaNigaGame
                 };
                 Lists.CardUC.Add(cards);
             }
+            // Shuffle once, then rebuild CardSet to match the shuffled CardViews
             CardInfo.Shuffle(Lists.CardUC);
-            CardInfo.ShuffleModel(Lists.CardSet);
+            Lists.CardSet.Clear();
+            Lists.CardSet.AddRange(Lists.CardUC.Select(c => c.Model));
             //int counter = 0;
             //int cardamount = 1;   
             
@@ -67,7 +69,7 @@ namespace GigaNigaGame
             for (int i = CardsLeft - 1; i >= 0; i--)
             {
                 var card = Lists.CardUC[i];
-                var CardSetI = Lists.CardSet[i];
+                var CardSetI = card.Model;
                 CardSetI.SetShop();
                 card.TAG.Text = Set.shop.ToString();
                 int Yoffset = Yoff.Next(-7, 7);
@@ -75,7 +77,8 @@ namespace GigaNigaGame
                 Canvas.SetLeft(card, Yoffset);
                 Canvas.SetTop(card, Xoffset);
                 FaceOffCards.Children.Add(card);
-                Lists.CardSet.Remove(CardSetI);
+                Lists.CardSet.RemoveAt(i);
+                Lists.CardUC.RemoveAt(i);
                 Lists.FaceOffCards.Add(card);
                 if (i == 0)
                     card.Cover.Visibility = Visibility.Collapsed;
@@ -222,3 +225,7 @@ namespace GigaNigaGame
         }
     }
 }
+
+
+
+

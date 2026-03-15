@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace GigaNigaGame.Folders.Classes
 {
-    internal class Point
+    public class XAndY
     {
         private double x;
         private double y;
 
-        public Point(double x, double y)
+        public XAndY(double x, double y)
         {
             this.x = x;
             this.y = y;
@@ -37,7 +37,7 @@ namespace GigaNigaGame.Folders.Classes
             y = value;
         }
 
-        public double Distance(Point other)
+        public double Distance(XAndY other)
         {
             double XD = other.GetX() - x;
             double YD = other.GetY() - y;

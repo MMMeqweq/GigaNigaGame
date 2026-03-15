@@ -57,7 +57,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Folders\Classes\AnimationAndMoves.cs" />
-    <Compile Include="Folders\Classes\Point.cs" />
+    <Compile Include="Folders\Classes\XAndY.cs" />
     <Compile Include="Folders\UserControl\StackPile.xaml.cs">
       <DependentUpon>StackPile.xaml</DependentUpon>
     </Compile>

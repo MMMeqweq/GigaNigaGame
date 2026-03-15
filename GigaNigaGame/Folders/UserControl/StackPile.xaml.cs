@@ -37,13 +37,14 @@ namespace GigaNigaGame
                     Width = MainWindow.CardWidth,
                     Height = MainWindow.CardHeight,
                     // assign owner so the view can reference its pile
-                    Owner = this
+                    Owner = this,
+                    Location = new XAndY(GetCenter(), y)
                 };
 
                 // ensure cover state follows model
                 view.Cover.Visibility = card.FaceUp ? Visibility.Collapsed : Visibility.Visible;
 
-                Canvas.SetLeft(view, 0);
+                Canvas.SetLeft(view, GetCenter());
                 Canvas.SetTop(view, y);
 
                 view.Tag = i;
@@ -94,7 +95,6 @@ namespace GigaNigaGame
         {
             int TmpInx = Cards.IndexOf(card);
             Cards.Remove(card);
-            int num = 0;//test
             CardViews.RemoveAt(TmpInx);
             if (CardViews.Count > 0)
                 CardViews[CardViews.Count - 1].Cover.Visibility = Visibility.Collapsed;
@@ -113,6 +113,12 @@ namespace GigaNigaGame
             Lists.MovingCards = Cards.Skip(TmpInx).ToList();
             for (int i = TmpInx; i < Cards.Count; i++)
                 Cards.RemoveAt(i);
-        }   
+        }
+
+        public double GetCenter()
+        {
+            double x = this.ActualWidth / 2;
+            return x;
+        }
     }
 }

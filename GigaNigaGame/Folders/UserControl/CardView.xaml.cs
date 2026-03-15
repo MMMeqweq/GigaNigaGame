@@ -21,6 +21,7 @@ namespace GigaNigaGame
     {
         public CardInfo Model { get; private set; }
         public StackPile Owner { get; set; }
+        public XAndY Location { get; set; }
 
         public CardView(CardInfo card)
         {

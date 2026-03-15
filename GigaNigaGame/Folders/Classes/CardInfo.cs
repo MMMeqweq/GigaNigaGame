@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using GigaNigaGame.Folders.Classes;
 
 namespace GigaNigaGame
 {
@@ -18,7 +19,7 @@ namespace GigaNigaGame
         public bool FaceUp = false;
         public string SuitSource;
         public Set set;
-        public Point point;
+        public XAndY point;
         static readonly Random random = new Random();
 
         

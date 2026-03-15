@@ -21,7 +21,7 @@ namespace GigaNigaGame
     {
         public CardInfo Model { get; private set; }
         public StackPile Owner { get; set; }
-        public XAndY Location { get; set; }
+        public XAndY Location = new XAndY(0, 0);
 
         public CardView(CardInfo card)
         {
@@ -32,6 +32,19 @@ namespace GigaNigaGame
             CardImage.Source = new BitmapImage(new Uri(card.SuitSource));
             Button.Foreground = (Brush)new BrushConverter().ConvertFromString(card.CardColor);
             Cover.Visibility = card.FaceUp ? Visibility.Collapsed : Visibility.Visible;
+            Location = card.point;
+        }
+        public CardView(CardInfo card, XAndY Pos)
+        {
+            InitializeComponent();
+            Model = card;
+            TAG.Text = card.set.ToString();
+            Button.Content = card.Num;
+            CardImage.Source = new BitmapImage(new Uri(card.SuitSource));
+            Button.Foreground = (Brush)new BrushConverter().ConvertFromString(card.CardColor);
+            Cover.Visibility = card.FaceUp ? Visibility.Collapsed : Visibility.Visible;
+            Location.SetX(Pos.GetX());
+            Location.SetY(Pos.GetY());
         }
 
         private void Cover_Click(object sender, RoutedEventArgs e)

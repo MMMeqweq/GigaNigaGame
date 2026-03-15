@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
@@ -85,6 +86,20 @@ namespace GigaNigaGame
             }
 
             TempTest.Text = Set.pile.ToString();
+
+            
+        }
+
+        public static void SetAllX()
+        {
+            for (int i = 0; i < Lists.StackPiles.Count; i++)
+            {
+                foreach (var card in Lists.StackPiles[i].CardViews)
+                {
+                    double X = i * (800 / 7);
+                    card.Model.point.SetX(X);
+                }
+            }
         }
 
         private void PileDeal()
@@ -156,6 +171,12 @@ namespace GigaNigaGame
             }
         }
 
+        public static void RestartApplication()
+        {
+            Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
+        }
+
         private void OnMoveRequested(StackPile From, List<CardInfo> Moving)
         {
             int FromIndexer = Lists.StackPiles.IndexOf(From);
@@ -180,7 +201,7 @@ namespace GigaNigaGame
         {
             foreach (var pile in Lists.StackPiles)
                 pile.Render();
-            
+            SetAllX();
         }
 
         private void BuildDeck()
@@ -222,6 +243,11 @@ namespace GigaNigaGame
                     return Brushes.LightGreen;
 
             }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            RestartApplication();
         }
     }
 }

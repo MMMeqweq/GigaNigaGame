@@ -5,6 +5,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using GigaNigaGame.Folders.Classes;
 
 namespace GigaNigaGame
 {
@@ -32,19 +33,21 @@ namespace GigaNigaGame
             for (int i = 0; i < Cards.Count; i++)
             {
                 var card = Cards[i];
+                XAndY pos = new XAndY(0, y + 140);
+                card.point = pos;
                 var view = new CardView(card)
                 {
                     Width = MainWindow.CardWidth,
                     Height = MainWindow.CardHeight,
                     // assign owner so the view can reference its pile
-                    Owner = this,
-                    Location = new XAndY(GetCenter(), y)
+                    Owner = this
                 };
+                
 
                 // ensure cover state follows model
                 view.Cover.Visibility = card.FaceUp ? Visibility.Collapsed : Visibility.Visible;
 
-                Canvas.SetLeft(view, GetCenter());
+                Canvas.SetLeft(view, 0);
                 Canvas.SetTop(view, y);
 
                 view.Tag = i;
@@ -53,6 +56,8 @@ namespace GigaNigaGame
                 PileStack.Children.Add(view);
                 y += YOffset;
             }
+
+            
         }
 
         private void Card_MouseDown(object sender, MouseButtonEventArgs e)

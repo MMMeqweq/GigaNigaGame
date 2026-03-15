@@ -12,7 +12,7 @@ namespace GigaNigaGame
         internal static List<CardView> CardUC = new List<CardView>();
         internal static List<CardView> FaceOffCards = new List<CardView>();
         internal static List<CardView> FaceUpCards = new List<CardView>();
-        internal readonly static List<StackPile> StackPiles = new List<StackPile>();
+        internal static List<StackPile> StackPiles = new List<StackPile>();
         internal static List<CardInfo> MovingCards = new List<CardInfo>();
     }
 }

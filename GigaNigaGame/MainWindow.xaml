@@ -5,19 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GigaNigaGame"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="700" Width="800">
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="0.4*"/>
-            <RowDefinition Height="0.01*"/>
+            <RowDefinition Height="0.25*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition/>
-            <ColumnDefinition Width="7.5*"/>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="5*"/>
         </Grid.ColumnDefinitions>
-        <Grid Grid.Row="2" x:Name="PilesGrid" Grid.ColumnSpan="3" >
+        <Grid Grid.Row="2" x:Name="PilesGrid" Grid.ColumnSpan="4" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -28,8 +28,11 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
         </Grid>
-        <TextBox x:Name="TempTest" Grid.Column="2" FontSize="35"/>
+        <TextBox x:Name="TempTest" Grid.Column="3" FontSize="35"/>
         <Canvas x:Name="FaceOffCards" HorizontalAlignment="Center"/>
         <Canvas x:Name="FaceUpCards" Grid.Column="1" HorizontalAlignment="Center"/>
+        <Button x:Name="RestartB" Grid.Column="2" Click="Button_Click">
+            <Image Source="/Folders/Images/RestartIMG.png" Stretch="Fill"/>
+        </Button>
     </Grid>
 </Window>

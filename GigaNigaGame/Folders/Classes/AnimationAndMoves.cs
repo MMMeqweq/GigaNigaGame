@@ -4,6 +4,7 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Windows.Media.Media3D;
 
@@ -33,27 +34,33 @@ namespace GigaNigaGame.Folders.Classes
         {
             var mainWindow = System.Windows.Application.Current.MainWindow as MainWindow;
             var ChosenCard = cardView.Model;
+            bool Run = false;
             for (int i = 0; i < Lists.StackPiles.Count; i++)
             {
                 StackPile TargetPile = Lists.StackPiles[i];
-                var TargetCard = Lists.StackPiles[i].Cards[Lists.StackPiles[i].Cards.Count - 1];
-                string str = $"StackPile {i} has {Lists.StackPiles[i].Cards.Count} cards. Top card is {TargetCard.Num} with the color {TargetCard.CardColor}.";
-                bool NumPlusOne = (ChosenCard.Num + 1 == TargetCard.Num);
-                bool DifColor = (ChosenCard.CardColor != TargetCard.CardColor);
                 bool NotEmpty = (TargetPile.Cards.Count > 0);
-                bool Run = (NumPlusOne && DifColor && NotEmpty);
                 if (!NotEmpty)
+                {
                     if (ChosenCard.Num == 13)
                         Run = true;
+                }
+                else if (NotEmpty)
+                {
+                    var TargetCard = Lists.StackPiles[i].Cards[Lists.StackPiles[i].Cards.Count - 1];
+                    bool DifPile = (Lists.StackPiles[i] != owner);
+                    bool NumPlusOne = (ChosenCard.Num + 1 == TargetCard.Num);
+                    bool DifColor = (ChosenCard.CardColor != TargetCard.CardColor);
+                    Run = (DifPile && NumPlusOne && DifColor && NotEmpty);
+                }
                 if (Run)
                 {
                     cardView.TAG.Text = Set.pile.ToString();
+                    cardView.Model.set = Set.pile;
                     Lists.FaceUpCards.Remove(cardView);
                     mainWindow.FaceUpCards.Children.Remove(cardView);
                     ChosenCard.FaceUp = true;
                     TargetPile.AddCard(ChosenCard);
                     mainWindow.RenderAll();
-                    mainWindow.TempTest.Text = Lists.FaceOffCards.Count.ToString();
                     return;
                 }
             }
@@ -66,6 +73,7 @@ namespace GigaNigaGame.Folders.Classes
             mainWindow.FaceOffCards.Children.Remove(cardview);
             mainWindow.FaceUpCards.Children.Add(cardview);
             cardview.TAG.Text = Set.faceupshop.ToString();
+            cardview.Model.set = Set.faceupshop;
             Lists.FaceOffCards.Remove(cardview);
             Lists.FaceUpCards.Add(cardview);
             if (Lists.FaceOffCards.Count > 0)
@@ -81,6 +89,7 @@ namespace GigaNigaGame.Folders.Classes
                     card.Cover.Visibility = Visibility.Visible;
                     Lists.FaceOffCards.Add(card);
                     card.TAG.Text = Set.shop.ToString();
+                    card.Model.set = Set.shop;
                     mainWindow.FaceUpCards.Children.Remove(card);
                     mainWindow.FaceOffCards.Children.Add(card);
                 }
@@ -91,6 +100,7 @@ namespace GigaNigaGame.Folders.Classes
 
         private static void MoveCards(StackPile owner, CardView cardView)
         {
+            var mainWindow = System.Windows.Application.Current.MainWindow as MainWindow;
             int pileIndex = Lists.StackPiles.IndexOf(owner);
             int cardIndex = owner.Cards.IndexOf(cardView.Model);
             var ChosenCard = owner.Cards[cardIndex];
@@ -114,6 +124,7 @@ namespace GigaNigaGame.Folders.Classes
                     bool DifColor = (ChosenCard.CardColor != TargetCard.CardColor);
                     Run = (DifPile && NumPlusOne && DifColor && NotEmpty);
                 }
+                mainWindow.TempTest.Text = cardView.Location.ToString();
                 if (Run)
                 {
                     cardView.TAG.Text = Set.pile.ToString();
@@ -127,7 +138,6 @@ namespace GigaNigaGame.Folders.Classes
                         owner.MoveCards(cardIndex);
                         TargetPile.AddCards(Lists.MovingCards);
                     }
-                    var mainWindow = System.Windows.Application.Current.MainWindow as MainWindow;
                     mainWindow.RenderAll();
                     if (owner.Cards.Count > 0)
                     {
@@ -135,7 +145,6 @@ namespace GigaNigaGame.Folders.Classes
                         owner.CardViews[owner.Cards.Count - 1].Cover.Visibility = Visibility.Collapsed;
                         mainWindow.RenderAll();
                     }
-                    mainWindow.TempTest.Text = Lists.FaceOffCards.Count.ToString();
                     return;
                 }
             }

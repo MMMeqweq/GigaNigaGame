@@ -94,20 +94,26 @@ namespace GigaNigaGame.Folders.Classes
             int pileIndex = Lists.StackPiles.IndexOf(owner);
             int cardIndex = owner.Cards.IndexOf(cardView.Model);
             var ChosenCard = owner.Cards[cardIndex];
+            bool Run = false;
             for (int i = 0; i < Lists.StackPiles.Count; i++)
             {
                 StackPile TargetPile = Lists.StackPiles[i];
-                var TargetCard = Lists.StackPiles[i].Cards[Lists.StackPiles[i].Cards.Count - 1];
-                string str = $"StackPile {i} has {Lists.StackPiles[i].Cards.Count} cards. Top card is {TargetCard.Num} with the color {TargetCard.CardColor}.";
-                string str2 = $"StackPile {pileIndex} has {owner.Cards.Count} cards. Top card is {ChosenCard.Num} with the color {ChosenCard.CardColor}.";
-                bool DifPile = (Lists.StackPiles[i] != owner);
-                bool NumPlusOne = (ChosenCard.Num + 1 == TargetCard.Num);
-                bool DifColor = (ChosenCard.CardColor != TargetCard.CardColor);
                 bool NotEmpty = (TargetPile.Cards.Count > 0);
-                bool Run = (DifPile && NumPlusOne && DifColor && NotEmpty);
                 if (!NotEmpty)
+                {
                     if (ChosenCard.Num == 13)
                         Run = true;
+                }
+                else if (NotEmpty)
+                {
+                    var TargetCard = Lists.StackPiles[i].Cards[Lists.StackPiles[i].Cards.Count - 1];
+                    string str = $"StackPile {i} has {Lists.StackPiles[i].Cards.Count} cards. Top card is {TargetCard.Num} with the color {TargetCard.CardColor}.";
+                    string str2 = $"StackPile {pileIndex} has {owner.Cards.Count} cards. Top card is {ChosenCard.Num} with the color {ChosenCard.CardColor}.";
+                    bool DifPile = (Lists.StackPiles[i] != owner);
+                    bool NumPlusOne = (ChosenCard.Num + 1 == TargetCard.Num);
+                    bool DifColor = (ChosenCard.CardColor != TargetCard.CardColor);
+                    Run = (DifPile && NumPlusOne && DifColor && NotEmpty);
+                }
                 if (Run)
                 {
                     cardView.TAG.Text = Set.pile.ToString();

@@ -25,6 +25,12 @@ namespace GigaNigaGame
             InitializeComponent();
         }
 
+        public StackPile(List<CardInfo> cards)
+        {
+            InitializeComponent();
+            AddCards(cards);
+        }
+
         public void Render()
         {
             PileStack.Children.Clear();
@@ -108,16 +114,21 @@ namespace GigaNigaGame
         public void MoveCards(int TmpInx)
         {
             Lists.MovingCards = Cards.Skip(TmpInx).ToList();
-            for (int i = TmpInx; i < Cards.Count; i++)
-                Cards.RemoveAt(i);
+            Lists.MovingCardsView.Clear();
+            foreach (var card in Lists.MovingCards)
+            {
+                CardView Card = new CardView(card);
+                Lists.MovingCardsView.Add(Card);
+            }
+
+            Cards.RemoveRange(TmpInx, Cards.Count - TmpInx);
         }   
 
         public void MoveCards(CardInfo card)
         {
             int TmpInx = Cards.IndexOf(card);
             Lists.MovingCards = Cards.Skip(TmpInx).ToList();
-            for (int i = TmpInx; i < Cards.Count; i++)
-                Cards.RemoveAt(i);
+            Cards.RemoveRange(TmpInx, Cards.Count - TmpInx);
         }
 
         public double GetCenter()

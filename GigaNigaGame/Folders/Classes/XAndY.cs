@@ -17,6 +17,17 @@ namespace GigaNigaGame.Folders.Classes
             this.y = y;
         }
 
+        public XAndY(XAndY other)
+        {
+            this.x = other.x;
+            this.y = other.y;
+        }
+
+        public void SetToMove()
+        {
+            y += 40;
+        }
+
         public double GetX()
         {
             return x;

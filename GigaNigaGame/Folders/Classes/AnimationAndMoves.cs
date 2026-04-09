@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
+using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Media3D;
 
 namespace GigaNigaGame.Folders.Classes
@@ -98,7 +102,7 @@ namespace GigaNigaGame.Folders.Classes
 
         }
 
-        private static void MoveCards(StackPile owner, CardView cardView)
+        private static async Task MoveCards(StackPile owner, CardView cardView)
         {
             var mainWindow = System.Windows.Application.Current.MainWindow as MainWindow;
             int pileIndex = Lists.StackPiles.IndexOf(owner);
@@ -112,7 +116,11 @@ namespace GigaNigaGame.Folders.Classes
                 if (!NotEmpty)
                 {
                     if (ChosenCard.Num == 13)
+                    {
+                        XAndY point = new XAndY(i*(800/7), 140);
+                        AnimateCard(cardView, cardView.Location, point);
                         Run = true;
+                    }
                 }
                 else if (NotEmpty)
                 {
@@ -127,15 +135,21 @@ namespace GigaNigaGame.Folders.Classes
                 mainWindow.TempTest.Text = cardView.Location.ToString();
                 if (Run)
                 {
+                    XAndY TargetPoint = new XAndY(TargetPile.Cards[TargetPile.Cards.Count - 1].point);
+                    TargetPoint.SetToMove();
                     cardView.TAG.Text = Set.pile.ToString();
                     if (owner.Cards.Count - 1 == cardIndex)
                     {
+                        AnimateCard(cardView, ChosenCard.point, TargetPoint);
+                        await Task.Delay(300);
                         owner.RemoveCard(ChosenCard);
                         TargetPile.AddCard(ChosenCard);
                     }
                     else if (owner.Cards.Count - 1 > cardIndex)
                     {
                         owner.MoveCards(cardIndex);
+                        AnimateSeveralCards(Lists.MovingCardsView, ChosenCard.point, TargetPoint);
+                        await Task.Delay(300);
                         TargetPile.AddCards(Lists.MovingCards);
                     }
                     mainWindow.RenderAll();
@@ -149,5 +163,85 @@ namespace GigaNigaGame.Folders.Classes
                 }
             }
         }
+
+
+        static void AnimateCard(CardView cardView, XAndY from, XAndY to)
+        {
+            double dx = to.GetX() - from.GetX();
+            double dy = to.GetY() - from.GetY();
+            cardView.RenderTransform = new TranslateTransform();
+            const double duration = 300; 
+            Storyboard SB = new Storyboard();
+
+            DoubleAnimation AnimX = new DoubleAnimation
+            {
+                To = dx,
+                Duration = TimeSpan.FromMilliseconds(duration)
+            };
+
+            DoubleAnimation AnimY = new DoubleAnimation
+            {
+                To = dy,
+                Duration = TimeSpan.FromMilliseconds(duration)
+            };
+
+            Storyboard.SetTarget(AnimX, cardView);
+            Storyboard.SetTarget(AnimY, cardView);
+
+            Storyboard.SetTargetProperty(AnimX,
+                new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
+
+            Storyboard.SetTargetProperty(AnimY,
+                new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
+
+            SB.Children.Add(AnimX);
+            SB.Children.Add(AnimY);
+
+            SB.Begin();
+        }
+        
+
+        static void AnimateSeveralCards(List<CardView> cards, XAndY from, XAndY to)
+        {
+            double dx = to.GetX() - from.GetX();
+            double dy = to.GetY() - from.GetY();
+            for (int i = 0; i < cards.Count; i++)
+            {
+                Storyboard SB = new Storyboard();
+
+                CardView card = cards[i];
+
+                card.RenderTransform = new TranslateTransform();
+
+                DoubleAnimation AnimX = new DoubleAnimation
+                {
+                    To = dx,
+                    Duration = TimeSpan.FromMilliseconds(300)
+                };
+
+                DoubleAnimation AnimY = new DoubleAnimation
+                {
+                    To = dy,
+                    Duration = TimeSpan.FromMilliseconds(300)
+                };
+
+                Storyboard.SetTarget(AnimX, card);
+                Storyboard.SetTarget(AnimY, card);
+
+                Storyboard.SetTargetProperty(AnimX,
+                    new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)"));
+
+                Storyboard.SetTargetProperty(AnimY,
+                    new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)"));
+
+                SB.Children.Add(AnimX);
+                SB.Children.Add(AnimY);
+
+                SB.Begin();
+
+                //dy += 40;
+            }
+        }
     }
+    
 }

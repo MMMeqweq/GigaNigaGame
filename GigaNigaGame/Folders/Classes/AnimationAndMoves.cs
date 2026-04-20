@@ -238,8 +238,6 @@ namespace GigaNigaGame.Folders.Classes
                 SB.Children.Add(AnimY);
 
                 SB.Begin();
-
-                //dy += 40;
             }
         }
     }

@@ -168,18 +168,37 @@ namespace GigaNigaGame.Folders.Classes
 
         static bool Check(CardView  card)
         {
+            StackPile owner = card.Owner;
+            var mainWindow = System.Windows.Application.Current.MainWindow as MainWindow;
             if (card.Model.suit.ToString().ToLower() == "diamond")
             {
                 if (Lists.Piles[0].Cards.Count == 0)
                 {
-                    XAndY point = new XAndY(342, 0);
-                    AnimateCard(card, point);
-                    card.Owner.RemoveCard(card.Model);
-                    Lists.Piles[0].AddCard(card.Model);
-                    return true;
+                    if (card.Model.Num == 1)
+                    {
+                        XAndY point = new XAndY(342, 0);
+                        AnimateCard(card, point);
+                        card.Owner.RemoveCard(card.Model);
+                        Lists.Piles[0].AddCard(card.Model);
+                        if (owner.Cards.Count > 0)
+                        {
+                            owner.Cards[owner.Cards.Count - 1].FaceUp = true;
+                            owner.CardViews[owner.Cards.Count - 1].Cover.Visibility = Visibility.Collapsed;
+                        }
+                        return true;
+                    }
                 }
                 else if (card.Model.Num - Lists.Piles[0].Cards[Lists.Piles[0].Cards.Count - 1].Num == 1)
                 {
+                    XAndY point = Lists.Piles[0].Cards[Lists.Piles[0].Cards.Count - 1].point;
+                    AnimateCard(card, point);
+                    card.Owner.RemoveCard(card.Model);
+                    Lists.Piles[0].AddCard(card.Model);
+                    if (owner.Cards.Count > 0)
+                    {
+                        owner.Cards[owner.Cards.Count - 1].FaceUp = true;
+                        owner.CardViews[owner.Cards.Count - 1].Cover.Visibility = Visibility.Collapsed;
+                    }
                     return true;
                 }
             }
@@ -187,14 +206,31 @@ namespace GigaNigaGame.Folders.Classes
             {
                 if (Lists.Piles[1].Cards.Count == 0)
                 {
-                    XAndY point = new XAndY(456, 0);
-                    AnimateCard(card, point);
-                    card.Owner.RemoveCard(card.Model);
-                    Lists.Piles[1].AddCard(card.Model);
-                    return true;
+                    if (card.Model.Num == 1)
+                    {
+                        XAndY point = new XAndY(456, 0);
+                        AnimateCard(card, point);
+                        card.Owner.RemoveCard(card.Model);
+                        Lists.Piles[1].AddCard(card.Model);
+                        if (owner.Cards.Count > 0)
+                        {
+                            owner.Cards[owner.Cards.Count - 1].FaceUp = true;
+                            owner.CardViews[owner.Cards.Count - 1].Cover.Visibility = Visibility.Collapsed;
+                        }
+                        return true;
+                    }
                 }
                 else if (card.Model.Num - Lists.Piles[1].Cards[Lists.Piles[1].Cards.Count - 1].Num == 1)
                 {
+                    XAndY point = Lists.Piles[1].Cards[Lists.Piles[1].Cards.Count - 1].point;
+                    AnimateCard(card, point);
+                    card.Owner.RemoveCard(card.Model);
+                    Lists.Piles[1].AddCard(card.Model);
+                    if (owner.Cards.Count > 0)
+                    {
+                        owner.Cards[owner.Cards.Count - 1].FaceUp = true;
+                        owner.CardViews[owner.Cards.Count - 1].Cover.Visibility = Visibility.Collapsed;
+                    }
                     return true;
                 }
             }
@@ -202,14 +238,31 @@ namespace GigaNigaGame.Folders.Classes
             {
                 if (Lists.Piles[2].Cards.Count == 0)
                 {
-                    XAndY point = new XAndY(570, 0);
-                    AnimateCard(card, point);
-                    card.Owner.RemoveCard(card.Model);
-                    Lists.Piles[2].AddCard(card.Model);
-                    return true;
+                    if (card.Model.Num == 1)
+                    {
+                        XAndY point = new XAndY(570, 0);
+                        AnimateCard(card, point);
+                        card.Owner.RemoveCard(card.Model);
+                        Lists.Piles[2].AddCard(card.Model);
+                        if (owner.Cards.Count > 0)
+                        {
+                            owner.Cards[owner.Cards.Count - 1].FaceUp = true;
+                            owner.CardViews[owner.Cards.Count - 1].Cover.Visibility = Visibility.Collapsed;
+                        }
+                        return true;
+                    }
                 }
                 else if (card.Model.Num - Lists.Piles[2].Cards[Lists.Piles[2].Cards.Count - 1].Num == 1)
                 {
+                    XAndY point = Lists.Piles[2].Cards[Lists.Piles[2].Cards.Count - 1].point;
+                    AnimateCard(card, point);
+                    card.Owner.RemoveCard(card.Model);
+                    Lists.Piles[2].AddCard(card.Model);
+                    if (owner.Cards.Count > 0)
+                    {
+                        owner.Cards[owner.Cards.Count - 1].FaceUp = true;
+                        owner.CardViews[owner.Cards.Count - 1].Cover.Visibility = Visibility.Collapsed;
+                    }
                     return true;
                 }
             }
@@ -217,14 +270,31 @@ namespace GigaNigaGame.Folders.Classes
             {
                 if (Lists.Piles[3].Cards.Count == 0)
                 {
-                    XAndY point = new XAndY(684, 0);
-                    AnimateCard(card, point);
-                    card.Owner.RemoveCard(card.Model);
-                    Lists.Piles[3].AddCard(card.Model);
-                    return true;
+                    if (card.Model.Num == 1)
+                    {
+                        XAndY point = new XAndY(684, 0);
+                        AnimateCard(card, point);
+                        card.Owner.RemoveCard(card.Model);
+                        Lists.Piles[3].AddCard(card.Model);
+                        if (owner.Cards.Count > 0)
+                        {
+                            owner.Cards[owner.Cards.Count - 1].FaceUp = true;
+                            owner.CardViews[owner.Cards.Count - 1].Cover.Visibility = Visibility.Collapsed;
+                        }
+                        return true;
+                    }
                 }
                 else if (card.Model.Num - Lists.Piles[3].Cards[Lists.Piles[3].Cards.Count - 1].Num == 1)
                 {
+                    XAndY point = Lists.Piles[3].Cards[Lists.Piles[3].Cards.Count - 1].point;
+                    AnimateCard(card, point);
+                    card.Owner.RemoveCard(card.Model);
+                    Lists.Piles[3].AddCard(card.Model);
+                    if (owner.Cards.Count > 0)
+                    {
+                        owner.Cards[owner.Cards.Count - 1].FaceUp = true;
+                        owner.CardViews[owner.Cards.Count - 1].Cover.Visibility = Visibility.Collapsed;
+                    }
                     return true;
                 }
             }

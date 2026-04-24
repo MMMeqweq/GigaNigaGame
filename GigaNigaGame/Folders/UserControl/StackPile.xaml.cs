@@ -136,5 +136,10 @@ namespace GigaNigaGame
             double x = this.ActualWidth / 2;
             return x;
         }
+        public void AddToPile(CardView card)
+        {
+            Cards.Add(card.Model);
+            CardViews.Add(card);
+        }
     }
 }

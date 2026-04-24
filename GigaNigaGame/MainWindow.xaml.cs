@@ -36,6 +36,7 @@ namespace GigaNigaGame
         public MainWindow()
         {
             InitializeComponent();
+            AddPiles();
             for (int i = 0; i < 52; i++)
             {
                 int number = i / 4 + 1;
@@ -99,6 +100,18 @@ namespace GigaNigaGame
                     double X = i * (800 / 7);
                     card.Model.point.SetX(X);
                 }
+            }
+        }
+
+        private void AddPiles()
+        {
+            for (int i = 0; i < 4; i ++)
+            {
+                var pile = new StackPile();
+                Grid.SetColumn(pile, i);
+                Grid.SetRow(pile, 0);
+                Piles.Children.Add(pile);
+                Lists.Piles.Add(pile);
             }
         }
 

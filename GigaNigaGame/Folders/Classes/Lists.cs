@@ -15,5 +15,10 @@ namespace GigaNigaGame
         internal static List<StackPile> StackPiles = new List<StackPile>();
         internal static List<CardInfo> MovingCards = new List<CardInfo>();
         internal static List<CardView> MovingCardsView = new List<CardView>();
+        internal static List<CardInfo> Spades = new List<CardInfo>();
+        internal static List<CardInfo> Diamonds = new List<CardInfo>();
+        internal static List<CardInfo> Hearts = new List<CardInfo>();
+        internal static List<CardInfo> Clubs = new List<CardInfo>();
+        internal static List<StackPile> Piles = new List<StackPile>();
     }
 }

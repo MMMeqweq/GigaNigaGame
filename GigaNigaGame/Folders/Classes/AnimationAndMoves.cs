@@ -16,11 +16,13 @@ namespace GigaNigaGame.Folders.Classes
 {
     internal static class AnimationAndMoves
     {
-        public static void BPress(StackPile owner, CardView cardView)
+        public static async void BPress(StackPile owner, CardView cardView)
         {
              string str = $"Card {cardView.Model.Num} with the color {cardView.Model.CardColor} was pressed part of the set {cardView.TAG.Text}.";
             if (cardView.TAG.Text == "pile")
             {
+                Check(cardView);
+                
                 MoveCards(owner, cardView);
             }
             else if (cardView.TAG.Text == "shop")
@@ -118,7 +120,7 @@ namespace GigaNigaGame.Folders.Classes
                     if (ChosenCard.Num == 13)
                     {
                         XAndY point = new XAndY(i*(800/7), 140);
-                        AnimateCard(cardView, cardView.Location, point);
+                        AnimateCard(cardView, point);
                         Run = true;
                     }
                 }
@@ -140,7 +142,7 @@ namespace GigaNigaGame.Folders.Classes
                     cardView.TAG.Text = Set.pile.ToString();
                     if (owner.Cards.Count - 1 == cardIndex)
                     {
-                        AnimateCard(cardView, ChosenCard.point, TargetPoint);
+                        AnimateCard(cardView, TargetPoint);
                         await Task.Delay(300);
                         owner.RemoveCard(ChosenCard);
                         TargetPile.AddCard(ChosenCard);
@@ -164,9 +166,75 @@ namespace GigaNigaGame.Folders.Classes
             }
         }
 
-
-        static void AnimateCard(CardView cardView, XAndY from, XAndY to)
+        static bool Check(CardView  card)
         {
+            if (card.Model.suit.ToString().ToLower() == "diamond")
+            {
+                if (Lists.Piles[0].Cards.Count == 0)
+                {
+                    XAndY point = new XAndY(342, 0);
+                    AnimateCard(card, point);
+                    card.Owner.RemoveCard(card.Model);
+                    Lists.Piles[0].AddCard(card.Model);
+                    return true;
+                }
+                else if (card.Model.Num - Lists.Piles[0].Cards[Lists.Piles[0].Cards.Count - 1].Num == 1)
+                {
+                    return true;
+                }
+            }
+            if (card.Model.suit.ToString().ToLower() == "spades")
+            {
+                if (Lists.Piles[1].Cards.Count == 0)
+                {
+                    XAndY point = new XAndY(456, 0);
+                    AnimateCard(card, point);
+                    card.Owner.RemoveCard(card.Model);
+                    Lists.Piles[1].AddCard(card.Model);
+                    return true;
+                }
+                else if (card.Model.Num - Lists.Piles[1].Cards[Lists.Piles[1].Cards.Count - 1].Num == 1)
+                {
+                    return true;
+                }
+            }
+            if (card.Model.suit.ToString().ToLower() == "hearts")
+            {
+                if (Lists.Piles[2].Cards.Count == 0)
+                {
+                    XAndY point = new XAndY(570, 0);
+                    AnimateCard(card, point);
+                    card.Owner.RemoveCard(card.Model);
+                    Lists.Piles[2].AddCard(card.Model);
+                    return true;
+                }
+                else if (card.Model.Num - Lists.Piles[2].Cards[Lists.Piles[2].Cards.Count - 1].Num == 1)
+                {
+                    return true;
+                }
+            }
+            if (card.Model.suit.ToString().ToLower() == "clubs")
+            {
+                if (Lists.Piles[3].Cards.Count == 0)
+                {
+                    XAndY point = new XAndY(684, 0);
+                    AnimateCard(card, point);
+                    card.Owner.RemoveCard(card.Model);
+                    Lists.Piles[3].AddCard(card.Model);
+                    return true;
+                }
+                else if (card.Model.Num - Lists.Piles[3].Cards[Lists.Piles[3].Cards.Count - 1].Num == 1)
+                {
+                    return true;
+                }
+            }
+            return false;
+
+        }
+
+        static void AnimateCard(CardView cardView, XAndY to)
+        {
+            XAndY from = cardView.Location;
             double dx = to.GetX() - from.GetX();
             double dy = to.GetY() - from.GetY();
             cardView.RenderTransform = new TranslateTransform();

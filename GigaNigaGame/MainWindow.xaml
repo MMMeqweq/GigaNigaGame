@@ -28,11 +28,23 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
         </Grid>
-        <TextBox x:Name="TempTest" Grid.Column="3" FontSize="35"/>
+        <TextBox x:Name="TempTest" Grid.Column="3" FontSize="35" Opacity="0" IsEnabled="False"/>
         <Canvas x:Name="FaceOffCards" HorizontalAlignment="Center"/>
         <Canvas x:Name="FaceUpCards" Grid.Column="1" HorizontalAlignment="Center"/>
         <Button x:Name="RestartB" Grid.Column="2" Click="Button_Click">
             <Image Source="/Folders/Images/RestartIMG.png" Stretch="Fill"/>
         </Button>
+        <Grid Grid.Column="3" x:Name="Piles">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <!--<Image Source="/Folders/Images/Diamonds.png" Opacity="0.5"/>
+            <Image Source="/Folders/Images/Spades.png" Grid.Column="1" Opacity="0.5"/>
+            <Image Source="/Folders/Images/Hearts.png" Grid.Column="2" Opacity="0.5"/>
+            <Image Source="/Folders/Images/Clubs.png" Grid.Column="3" Opacity="0.5"/>-->
+        </Grid>
     </Grid>
 </Window>

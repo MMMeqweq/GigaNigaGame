@@ -5,6 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:GigaNigaGame"
         mc:Ignorable="d"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent"
+        AllowsTransparency="True"
+        KeyDown="Window_KeyDown"
         Title="MainWindow" Height="700" Width="800">
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
@@ -41,10 +46,10 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <!--<Image Source="/Folders/Images/Diamonds.png" Opacity="0.5"/>
+            <Image Source="/Folders/Images/Diamonds.png" Opacity="0.5"/>
             <Image Source="/Folders/Images/Spades.png" Grid.Column="1" Opacity="0.5"/>
             <Image Source="/Folders/Images/Hearts.png" Grid.Column="2" Opacity="0.5"/>
-            <Image Source="/Folders/Images/Clubs.png" Grid.Column="3" Opacity="0.5"/>-->
+            <Image Source="/Folders/Images/Clubs.png" Grid.Column="3" Opacity="0.5"/>
         </Grid>
     </Grid>
 </Window>

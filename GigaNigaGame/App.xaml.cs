@@ -13,5 +13,6 @@ namespace GigaNigaGame
     /// </summary>
     public partial class App : Application
     {
+        
     }
 }

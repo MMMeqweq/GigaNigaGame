@@ -61,6 +61,9 @@
     <Compile Include="Folders\UserControl\StackPile.xaml.cs">
       <DependentUpon>StackPile.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Starting Screen.xaml.cs">
+      <DependentUpon>Starting Screen.xaml</DependentUpon>
+    </Compile>
     <Page Include="Folders\UserControl\CardView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -83,6 +86,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Folders\UserControl\StackPile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Starting Screen.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -22,8 +22,14 @@ namespace GigaNigaGame.Folders.Classes
             if (cardView.TAG.Text == "pile")
             {
                 Check(cardView);
-                
-                MoveCards(owner, cardView);
+                if (Check(cardView))
+                {
+                    cardView.Height = 133;
+                    cardView.Width = 125;
+                    return;
+                }
+
+                await MoveCards(owner, cardView);
             }
             else if (cardView.TAG.Text == "shop")
             {

@@ -56,6 +56,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Folders\DataBase\DAL-2.cs" />
     <Compile Include="Folders\Classes\AnimationAndMoves.cs" />
     <Compile Include="Folders\Classes\XAndY.cs" />
     <Compile Include="Folders\UserControl\StackPile.xaml.cs">
@@ -128,6 +129,11 @@
     <Resource Include="Folders\Images\Diamonds.png" />
     <Resource Include="Folders\Images\Hearts.png" />
     <Resource Include="Folders\Images\Spades.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Folders\DataBase\DataBase.accdb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

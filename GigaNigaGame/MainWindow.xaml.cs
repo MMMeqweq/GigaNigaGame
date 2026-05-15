@@ -264,6 +264,30 @@ namespace GigaNigaGame
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            string connectionString =
+        @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\royna\source\repos\GigaNigaGame\GigaNigaGame\Folders\DataBase\DataBase.accdb;Persist Security Info=True";
+
+            using (OleDbConnection con = new OleDbConnection(connectionString))
+            {
+                con.Open();
+
+                // מוחק את כל הרשומות
+                OleDbCommand deleteCmd =
+                    new OleDbCommand("DELETE FROM [Players + score]", con);
+
+                deleteCmd.ExecuteNonQuery();
+
+                // מאפס את ה-AutoNumber
+                OleDbCommand resetCmd =
+                    new OleDbCommand(
+                        "ALTER TABLE [Players + score] ALTER COLUMN ID COUNTER(1,1)",
+                        con);
+
+                resetCmd.ExecuteNonQuery();
+            }
+
+            MessageBox.Show("Database reset!");
+
             RestartApplication();
         }
 

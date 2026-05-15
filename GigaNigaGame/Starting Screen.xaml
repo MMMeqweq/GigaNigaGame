@@ -18,7 +18,7 @@
             <RowDefinition Height="112.5"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <TextBox Text="Press K At any time to exit the game" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="24" IsReadOnly="True" BorderThickness="0"/>
+        <TextBox Text="Press Esc At any time to exit the game" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" IsReadOnly="True" BorderThickness="0"/>
         <TextBox Text="Enter Name" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="50" IsReadOnly="True" BorderThickness="0"/>
         <TextBox
         x:Name="NameTextBox"

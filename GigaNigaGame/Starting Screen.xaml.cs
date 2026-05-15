@@ -28,7 +28,7 @@ namespace GigaNigaGame
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.K)
+            if (e.Key == Key.Escape)
             {
                 Application.Current.Shutdown();
             }

@@ -21,6 +21,7 @@ using System.Data.OleDb;
 using System.Data;
 
 namespace GigaNigaGame
+
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -38,6 +39,7 @@ namespace GigaNigaGame
         public MainWindow()
         {
             InitializeComponent();
+            MessageBox.Show($"ID: {Lists.CurrentPlayerId}");
             AddPiles();
             for (int i = 0; i < 52; i++)
             {

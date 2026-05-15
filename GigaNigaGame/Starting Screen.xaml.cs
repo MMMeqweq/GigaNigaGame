@@ -33,5 +33,42 @@ namespace GigaNigaGame
                 Application.Current.Shutdown();
             }
         }
+
+        public static int GetOrCreatePlayer(string playerName)
+        {
+            // Check if player exists
+            string selectSql =
+                $"SELECT ID FROM [Players + score] WHERE PlayerName = '{playerName}'";
+
+            DataTable dt = DAL.GetDataTable(selectSql);
+
+            // Player exists
+            if (dt.Rows.Count > 0)
+            {
+                return Convert.ToInt32(dt.Rows[0]["ID"]);
+            }
+
+            // Player does not exist -> insert
+            string insertSql =
+                $"INSERT INTO [Players + score] (PlayerName) VALUES ('{playerName}')";
+
+            DAL.ExecuteNonQuery(insertSql);
+
+            // Get newly created player ID
+            DataTable newDt =
+                DAL.GetDataTable(
+                    $"SELECT ID FROM [Players + score] WHERE PlayerName = '{playerName}'");
+
+            return Convert.ToInt32(newDt.Rows[0]["ID"]);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            Lists.CurrentPlayerId = GetOrCreatePlayer(NameTextBox.Text);
+            MainWindow mainWindow = new MainWindow();
+            Application.Current.MainWindow = mainWindow;
+            mainWindow.Show();
+            this.Close();
+        }
     }
 }

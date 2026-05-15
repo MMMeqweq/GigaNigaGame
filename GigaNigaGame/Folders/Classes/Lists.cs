@@ -20,5 +20,7 @@ namespace GigaNigaGame
         internal static List<CardInfo> Hearts = new List<CardInfo>();
         internal static List<CardInfo> Clubs = new List<CardInfo>();
         internal static List<StackPile> Piles = new List<StackPile>();
+
+        internal static int CurrentPlayerId;
     }
 }

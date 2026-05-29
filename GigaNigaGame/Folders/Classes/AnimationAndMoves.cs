@@ -26,6 +26,17 @@ namespace GigaNigaGame.Folders.Classes
                 {
                     cardView.Height = 133;
                     cardView.Width = 125;
+
+                    if (CheckWin())
+                    {
+                        string updateSql =
+                        "UPDATE [Players + score] " +
+                        "SET PlayerWins = PlayerWins + 1 " +
+                        $"WHERE ID= {Lists.CurrentPlayerId}";
+
+                        DAL.ExecuteNonQuery(updateSql);
+                    }
+
                     return;
                 }
 
@@ -41,6 +52,16 @@ namespace GigaNigaGame.Folders.Classes
             }
         }
 
+        private static bool CheckWin()
+        {
+            bool FullSpades = Lists.Spades.Count == 13; 
+            bool FullHearts = Lists.Hearts.Count == 13;
+            bool FullDiamonds = Lists.Diamonds.Count == 13;
+            bool FullClubs = Lists.Clubs.Count == 13;
+            if (FullClubs && FullDiamonds && FullHearts && FullSpades)
+                return true;
+            return false;
+        }
 
         private static void FaceUpShopPress(CardView cardView, StackPile owner)
         {

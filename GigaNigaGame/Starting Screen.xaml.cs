@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data;
 using System.Data.OleDb;
+using System.Runtime.CompilerServices;
 
 namespace GigaNigaGame
 {
@@ -24,6 +25,7 @@ namespace GigaNigaGame
         public Starting_Screen()
         {
             InitializeComponent();
+            Lists.CurrentPlayerId = -1;
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -60,6 +62,42 @@ namespace GigaNigaGame
                     $"SELECT ID FROM [Players + score] WHERE PlayerName = '{playerName}'");
 
             return Convert.ToInt32(newDt.Rows[0]["ID"]);
+        }
+
+        private void Leader()
+        {
+            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\user\source\repos\GigaNigaGame\GigaNigaGame\Folders\DataBase\DataBase.accdb;Persist Security Info=True";
+            using (OleDbConnection conn = new OleDbConnection(connectionString))
+            {
+                conn.Open();
+
+                string query = "SELECT TOP 3 [PlayerName], [PlayerWins] FROM [Players + score] ORDER BY [PlayerWins] DESC";
+
+                using (OleDbCommand cmd = new OleDbCommand(query, conn))
+                using (OleDbDataReader reader = cmd.ExecuteReader())
+                {
+                    int rank = 1;
+
+                    while (reader.Read())
+                    {
+                        string name = reader["Name"].ToString();
+                        int score = Convert.ToInt32(reader["PlayerWins"]);
+
+                        string leaderboardText = $"{rank} -- {name}:{score}";
+
+                        if (rank == 1)
+                            this.Num1.Text = leaderboardText; 
+                        if (rank == 2)
+                            this.Num2.Text = leaderboardText; 
+                        if (rank == 3)
+                            this.Num3.Text = leaderboardText; 
+
+
+
+                        rank++;
+                    }
+                }
+            }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)

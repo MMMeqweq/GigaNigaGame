@@ -26,6 +26,7 @@ namespace GigaNigaGame
         {
             InitializeComponent();
             Lists.CurrentPlayerId = -1;
+            Leader();
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -66,7 +67,7 @@ namespace GigaNigaGame
 
         private void Leader()
         {
-            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\user\source\repos\GigaNigaGame\GigaNigaGame\Folders\DataBase\DataBase.accdb;Persist Security Info=True";
+            string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\royna\source\repos\GigaNigaGame\GigaNigaGame\Folders\DataBase\DataBase.accdb;Persist Security Info=True";
             using (OleDbConnection conn = new OleDbConnection(connectionString))
             {
                 conn.Open();
@@ -80,7 +81,7 @@ namespace GigaNigaGame
 
                     while (reader.Read())
                     {
-                        string name = reader["Name"].ToString();
+                        string name = reader["PlayerName"].ToString();
                         int score = Convert.ToInt32(reader["PlayerWins"]);
 
                         string leaderboardText = $"{rank} -- {name}:{score}";

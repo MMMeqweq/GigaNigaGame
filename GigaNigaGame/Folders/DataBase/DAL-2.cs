@@ -12,7 +12,7 @@ public class DAL
 {
     public static OleDbConnection GetConnection()
     {
-        string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\user\source\repos\GigaNigaGame\GigaNigaGame\Folders\DataBase\DataBase.accdb;Persist Security Info=True";
+        string connectionString = @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\royna\source\repos\GigaNigaGame\GigaNigaGame\Folders\DataBase\DataBase.accdb;Persist Security Info=True";
         return new OleDbConnection(connectionString);
     }
 

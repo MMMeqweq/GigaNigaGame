@@ -265,7 +265,7 @@ namespace GigaNigaGame
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string connectionString =
-        @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\user\source\repos\GigaNigaGame\GigaNigaGame\Folders\DataBase\DataBase.accdb;Persist Security Info=True";
+        @"Provider=Microsoft.ACE.OLEDB.12.0;Data Source=C:\Users\royna\source\repos\GigaNigaGame\GigaNigaGame\Folders\DataBase\DataBase.accdb;Persist Security Info=True";
 
             using (OleDbConnection con = new OleDbConnection(connectionString))
             {
